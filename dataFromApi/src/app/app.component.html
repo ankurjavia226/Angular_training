@@ -1,0 +1,17 @@
+<div class="data" >
+  <table>
+    <tr>
+      <th> User Id</th>
+      <th> ID </th>
+      <th> Title </th>
+      <th> Body </th>
+    </tr>
+    
+    <tr class="dataForDisplay" *ngFor="let user of data"> 
+      <td> {{ user.userId }} </td>
+      <td> {{ user.id }} </td>
+      <td> {{ user.title }} </td>
+      <td> {{ user.body }} </td>
+    </tr>
+  </table>
+</div>
