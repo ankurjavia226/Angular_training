@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <form [formGroup]="studentRegistrationForm" (ngSubmit)=onSubmit()>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="firstName"
+          [class.is-invalid]="firstName.invalid && firstName.touched">
+      <small [class.d-none]="firstName.valid || firstName.untouched" 
+          class="text-danger">Firstname is Required</small>
+    </div>
+  
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName"
+          [class.is-invalid]="lastName.invalid && lastName.touched">
+      <small [class.d-none]="lastName.valid || lastName.untouched"
+          class="text-danger">Lastname is Required</small>
+    </div>
+  
+    <div class="form-group">
+        <label>Gender</label>
+        <div class="form-control">
+            <label class="form-check-inline">
+                <input class="form-check-input" type="radio" value="male" formControlName="gender">
+                <span>Male</span>
+            </label>
+            <label class="form-check-inline">   
+                <input class="form-check-input" type="radio" value="female" formControlName="gender">
+                <span>Female</span>
+            </label>
+        </div>        
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email"
+          [class.is-invalid]="email.invalid && email.touched">
+      <small [class.d-none]="email.valid || email.untouched"
+          class="text-danger">Email is Required</small>
+    </div>
+  
+    <div class="form-group">
+      <label>Address</label>
+      <textarea class="form-control" rows="3" formControlName="address"
+          [class.is-invalid]="address.invalid && address.touched"></textarea>
+      <small [class.d-none]="address.valid || address.untouched"
+          class="text-danger">Address is Required</small>
+    </div>
+  
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="number" class="form-control" formControlName="phoneNumber"
+          [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched">
+      <small [class.d-none]="phoneNumber.valid || phoneNumber.untouched"
+          class="text-danger">Phonenumber is Required</small>
+    </div>
+  
+    <div class="form-group">
+      <label>Qualification</label>
+      <select class="custom-select" formControlName="degree" 
+          (blur)="checkDegree(degree.value)" (change)="checkDegree(degree.value)"
+          [class.is-invalid]="degreeHasError && degree.touched">
+          <option value="default">I have completed</option>
+          <option *ngFor="let degree of courses">{{degree}}</option>
+      </select>
+      <small class="text-danger" [class.d-none]="!degreeHasError || degree.untouched"> Please choose a degree</small>
+    </div>
+  
+    <div class="form-group">
+      <label>Upload Resume</label>
+      <input type="file" class="custom-file" (change)="onFileSelected($event)">
+    </div>
+  
+    <div class="form-check mb 3">
+      <input type="checkbox" class="form-check-input" formControlName="acceptTermsAndCondition"
+            (change)=checkAgreement($event)>
+      <label class="form-check-label">Accept Terms & Condition</label>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" 
+        [disabled]="!studentRegistrationForm.valid || agreeWithCondition">Submit</button>
+  </form>
+</div>
