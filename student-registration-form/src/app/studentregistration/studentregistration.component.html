@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    {{studentRegistrationForm.value | json}}
   <form [formGroup]="studentRegistrationForm" (ngSubmit)=onSubmit()>
     <div class="form-group">
       <label>First Name</label>
@@ -40,10 +41,19 @@
   
     <div class="form-group">
       <label>Address</label>
-      <textarea class="form-control" rows="3" formControlName="address"
-          [class.is-invalid]="address.invalid && address.touched"></textarea>
-      <small [class.d-none]="address.valid || address.untouched"
-          class="text-danger">Address is Required</small>
+       
+      <div class="input-group" formArrayName="addressList" 
+          *ngFor="let address of addressList.controls, let i=index">
+          <textarea class="form-control my-1" rows="3" style="resize:none" [formControlName]="i"
+            [class.is-invalid]="address.invalid && address.touched"></textarea> 
+          <button class="btn btn-secondary my-1" type="button" (click)="removeAddress(i)"> Remove </button>
+          <small [class.d-none]="address.valid || address.untouched"
+            class="text-danger">Address is Required</small>
+       </div>
+          
+
+      <button (click)="addAlternateAddress()" class="btn btn-secondary btn-sm m-1" type="button">
+           Add Alternater Address</button>
     </div>
   
     <div class="form-group">
@@ -56,13 +66,12 @@
   
     <div class="form-group">
       <label>Qualification</label>
-      <select class="custom-select" formControlName="degree" 
-          (blur)="checkDegree(degree.value)" (change)="checkDegree(degree.value)"
-          [class.is-invalid]="degreeHasError && degree.touched">
-          <option value="default">I have completed</option>
+      <select class="custom-select" formControlName="degree"
+          [class.is-invalid]="degree.invalid && degree.touched">
+          <option value="">-- select your qualification --</option>
           <option *ngFor="let degree of courses">{{degree}}</option>
       </select>
-      <small class="text-danger" [class.d-none]="!degreeHasError || degree.untouched"> Please choose a degree</small>
+      <small class="text-danger" [class.d-none]="degree.valid || degree.untouched"> Please choose a degree</small>
     </div>
   
     <div class="form-group">

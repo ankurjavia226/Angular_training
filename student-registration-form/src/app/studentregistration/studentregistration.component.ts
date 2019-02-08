@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-studentregistration',
@@ -9,83 +9,91 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 export class StudentregistrationComponent implements OnInit {
 
+  // data variables
   courses = ['B.E.', 'B.A.', 'B.Com.', 'Diploma'];
-  degreeHasError: Boolean = true;
-  agreeWithCondition: Boolean = false;
   selectedFile: File = null;
+
+  // state variable
+  fileUploaded: Boolean = false;
+  agreeWithCondition: Boolean = false;
+
+  // form variables
   studentRegistrationForm: FormGroup;
-  studentData = null;
 
-  constructor (private fb: FormBuilder, private cd: ChangeDetectorRef) {}
-
-  get firstName (){
-    return this.studentRegistrationForm.get('firstName');
-  }
-
-  get lastName (){
-    return this.studentRegistrationForm.get('lastName');
-  }
-
-  get gender () {
-    return this.studentRegistrationForm.get('gender');
-  }
-
-  get email (){
-    return this.studentRegistrationForm.get('email');
-  }
-
-  get address (){
-    return this.studentRegistrationForm.get('address');
-  }
-
-  get phoneNumber (){
-    return this.studentRegistrationForm.get('phoneNumber');
-  }
-
-  get degree (){
-    return this.studentRegistrationForm.get('degree');
-  }
+  constructor (private _fb: FormBuilder) {}
 
   ngOnInit() {
-    this.studentRegistrationForm = this.fb.group({
+    this.createStudentRegistrationForm();
+    this.addAlternateAddress ();
+  }
+
+  createStudentRegistrationForm = ()=>{
+    this.studentRegistrationForm = this._fb.group({
       firstName: ['',Validators.required],
       lastName: ['',Validators.required],
       gender: ['',Validators.required],
       email: ['',Validators.required],
-      address: ['',Validators.required],
+      addressList: this._fb.array([]),
       phoneNumber: ['',Validators.required],
+      file:['',Validators.required],
       degree: ['',Validators.required],
-      file: [null,Validators.required],
       acceptTermsAndCondition: ['',Validators.required] 
     });
   }
 
-  checkAgreement(event){
+  addAlternateAddress =  () => {
+    this.addressList.push(this._fb.control('',Validators.required));  
+  }
+
+  removeAddress = (index) => { 
+      this.addressList.removeAt(index);
+  }
+
+  checkAgreement = (event) => {
     this.agreeWithCondition = !event.target.checked;
   }
 
-  checkDegree(value){
-      this.degreeHasError = value === 'default'; 
+  onFileSelected = (event) =>{
+    const file = event.target.files[0];
+    const fileToUpload: FormData = new FormData();
+    this.selectedFile = file; // key value [{requirekey:'profilepicture',file:file}]
+    this.formControls['file'].setValue({filename:file.name})
   }
 
-  onFileSelected(event) {
-    //this.selectedFile = file.item(0);
-    const reader = new FileReader();
-    const [file] = event.target.files;
-
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      this.studentRegistrationForm.patchValue({
-        file: reader.result
-      });
-
-      this.cd.markForCheck();
-    };
+  onSubmit = () => {  
+    console.log(this.studentRegistrationForm.value);
+    console.log(this.selectedFile);
+  }
+  
+  get firstName (){
+    return this.formControls['firstName'];
   }
 
-  onSubmit() {
-    this.studentData = this.studentRegistrationForm.value; 
-    console.log(this.studentData);
+  get lastName (){
+    return this.formControls['lastName'];
+  }
+
+  get gender () {
+    return this.formControls['gender'];
+  }
+
+  get email (){
+    return this.formControls['email'];
+  }
+
+  get phoneNumber (){
+    return this.formControls['phoneNumber'];
+  }
+
+  get degree (){
+    return this.formControls['degree'];
+  }
+
+  get addressList (){
+    return this.formControls['addressList'] as FormArray;
+  }
+
+  get formControls (){
+    return this.studentRegistrationForm.controls;
   }
 }
