@@ -46,12 +46,12 @@
           *ngFor="let address of addressList.controls, let i=index">
           <textarea class="form-control my-1" rows="3" style="resize:none" [formControlName]="i"
             [class.is-invalid]="address.invalid && address.touched"></textarea> 
-          <button class="btn btn-secondary my-1" type="button" (click)="removeAddress(i)"> Remove </button>
+          <button class="btn btn-secondary my-1" type="button" [class.d-none]="lastAddress"
+            (click)="removeAddress(i)"> Remove </button>
           <small [class.d-none]="address.valid || address.untouched"
             class="text-danger">Address is Required</small>
-       </div>
-          
-
+      </div>
+        
       <button (click)="addAlternateAddress()" class="btn btn-secondary btn-sm m-1" type="button">
            Add Alternater Address</button>
     </div>

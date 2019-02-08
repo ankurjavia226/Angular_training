@@ -11,11 +11,13 @@ export class StudentregistrationComponent implements OnInit {
 
   // data variables
   courses = ['B.E.', 'B.A.', 'B.Com.', 'Diploma'];
-  selectedFile: File = null;
+  selectedFile = [];
+  file: File = null;
 
   // state variable
-  fileUploaded: Boolean = false;
+  lastAddress: Boolean = true;
   agreeWithCondition: Boolean = false;
+
 
   // form variables
   studentRegistrationForm: FormGroup;
@@ -42,11 +44,15 @@ export class StudentregistrationComponent implements OnInit {
   }
 
   addAlternateAddress =  () => {
-    this.addressList.push(this._fb.control('',Validators.required));  
+    this.addressList.push(this._fb.control('',Validators.required));
+    if(this.addressList.length > 1){
+      this.lastAddress = false;
+    }  
   }
 
   removeAddress = (index) => { 
       this.addressList.removeAt(index);
+      this.lastAddress = this.addressList.length === 1;
   }
 
   checkAgreement = (event) => {
@@ -54,10 +60,9 @@ export class StudentregistrationComponent implements OnInit {
   }
 
   onFileSelected = (event) =>{
-    const file = event.target.files[0];
-    const fileToUpload: FormData = new FormData();
-    this.selectedFile = file; // key value [{requirekey:'profilepicture',file:file}]
-    this.formControls['file'].setValue({filename:file.name})
+    this.file = event.target.files[0];
+    this.selectedFile.push({'Resume':this.file}); // key value [{requirekey:'profilepicture',file:file}]
+    this.formControls['file'].setValue(this.file.name)
   }
 
   onSubmit = () => {  
