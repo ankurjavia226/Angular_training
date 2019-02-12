@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { passwordValidator } from '../shared/password.validator';
+import { checkLocalStorage } from '../shared/localStorageData';
 
 @Component({
   selector: 'app-user-registration',
@@ -56,16 +57,8 @@ export class UserRegistrationComponent implements OnInit {
       this.lastAddress = this.addressList.length === 1;
   }
 
-  checkLocalStorage = () => {
-    let currentData = [];
-    if(localStorage.getItem(this.datakey)){
-      currentData = JSON.parse(localStorage.getItem(this.datakey))
-    }
-    return currentData;
-  }
-
   onSubmit = () => {
-    this.userDetailArray = this.checkLocalStorage();
+    this.userDetailArray = checkLocalStorage();
     this.userDetailArray.push(this.userRegistrationForm.value);
 
     let userArrayString = JSON.stringify(this.userDetailArray);

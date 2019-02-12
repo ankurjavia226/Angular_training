@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { checkLocalStorage } from '../shared/localStorageData';
 
 @Component({
   selector: 'app-user-login',
@@ -34,11 +35,11 @@ export class UserLoginComponent implements OnInit {
   }
 
   onSubmit = () => {
-    this.userDetailArray = this.checkLocalStorage();
+    this.userDetailArray = checkLocalStorage();
     
     for(let i=0; i<this.userDetailArray.length; i++){
-      if(this.userDetailArray[i].email == this.userLoginForm.value.userName && 
-          this.userDetailArray[i].password == this.userLoginForm.value.password){
+      if(this.userName.value == this.userDetailArray[i].email && 
+          this.password.value == this.userDetailArray[i].password){
             this._router.navigateByUrl('/about');
             this.verifyUser = true;
       }
@@ -47,14 +48,6 @@ export class UserLoginComponent implements OnInit {
     if(!this.verifyUser){
       alert('Please enter correct cradential.!');
     }
-  }
-
-  checkLocalStorage = () => {
-    let currentData = [];
-    if(localStorage.getItem(this.datakey)){
-      currentData = JSON.parse(localStorage.getItem(this.datakey))
-    }
-    return currentData;
   }
 
   get userName() {
