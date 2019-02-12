@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,Validators, FormBuilder } from '@angular/forms';
+import { FormGroup,Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { passwordValidator } from '../shared/password.validator';
 
 @Component({
   selector: 'app-user-registration',
@@ -12,6 +13,11 @@ export class UserRegistrationComponent implements OnInit {
   // data variables
   courses = ['B.E.', 'B.A.', 'B.Com.', 'Diploma'];
   selectedFile: File = null;
+  datakey: string = 'UserData';
+  userDetailArray = [];
+
+  // state variable
+  lastAddress: Boolean = true;
 
   // form variables
   userRegistrationForm: FormGroup;
@@ -21,6 +27,7 @@ export class UserRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.createuserRegistrationForm();
+    this.addAlternateAddress();
   }
 
   createuserRegistrationForm = ()=>{
@@ -29,16 +36,44 @@ export class UserRegistrationComponent implements OnInit {
       lastName: ['',Validators.required],
       gender: ['male',Validators.required],
       email: ['',Validators.required],
-      address: ['',Validators.required],
-      phoneNumber: ['',Validators.required]
-    });
+      password: [''],
+      confirmPassword: [''],
+      addressList: this._fb.array([]),
+      phoneNumber: ['',[Validators.required,
+                        Validators.pattern('^[1-9]{1}[0-9]{9}$')]]
+    }, {validators: passwordValidator});
   }
 
-  onSubmit = () => {   
-    console.log(this.userRegistrationForm.value);
+  addAlternateAddress =  () => {
+    this.addressList.push(this._fb.control('',Validators.required));
+    if(this.addressList.length > 1){
+      this.lastAddress = false;
+    }  
+  }
+
+  removeAddress = (index) => { 
+      this.addressList.removeAt(index);
+      this.lastAddress = this.addressList.length === 1;
+  }
+
+  checkLocalStorage = () => {
+    let currentData = [];
+    if(localStorage.getItem(this.datakey)){
+      currentData = JSON.parse(localStorage.getItem(this.datakey))
+    }
+    return currentData;
+  }
+
+  onSubmit = () => {
+    this.userDetailArray = this.checkLocalStorage();
+    this.userDetailArray.push(this.userRegistrationForm.value);
+
+    let userArrayString = JSON.stringify(this.userDetailArray);
+    localStorage.setItem(this.datakey,userArrayString);
+
     this._router.navigateByUrl('/home');
   }
-  
+
   get firstName (){
     return this.formControls['firstName'];
   }
@@ -59,8 +94,8 @@ export class UserRegistrationComponent implements OnInit {
     return this.formControls['phoneNumber'];
   }
 
-  get address (){
-    return this.formControls['address'] ;
+  get addressList (){
+    return this.formControls['addressList'] as FormArray;
   }
 
   get formControls (){
