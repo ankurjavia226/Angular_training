@@ -42,12 +42,13 @@ export class UserLoginComponent implements OnInit {
           this.password.value == this.userDetailArray[i].password){
 
             sessionStorage.setItem('loggedinUser',this.userName.value);
-            this._router.navigateByUrl('/about');
+            this._router.navigateByUrl('/about').then(()=>
+              window.location.reload());
             this.verifyUser = true;
       }
     }
 
-    if(!this.verifyUser){
+    if(!sessionStorage.length){
       alert('Please enter correct cradential.!');
     }
   }
