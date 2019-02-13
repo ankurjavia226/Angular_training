@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  setVisible: Boolean = true;
   constructor() { }
 
   ngOnInit() {
+    
+    if(sessionStorage.length){
+      this.setVisible = false;
+    }
   }
-
 }

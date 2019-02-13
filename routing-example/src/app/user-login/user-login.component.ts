@@ -40,6 +40,8 @@ export class UserLoginComponent implements OnInit {
     for(let i=0; i<this.userDetailArray.length; i++){
       if(this.userName.value == this.userDetailArray[i].email && 
           this.password.value == this.userDetailArray[i].password){
+
+            sessionStorage.setItem('loggedinUser',this.userName.value);
             this._router.navigateByUrl('/about');
             this.verifyUser = true;
       }
