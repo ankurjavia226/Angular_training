@@ -9,6 +9,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ContactUsComponent,
     UserRegistrationComponent,
     UserLoginComponent,
+    NavigationMenuComponent,
     DashboardComponent
   ],
   imports: [

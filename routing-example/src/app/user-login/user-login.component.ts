@@ -17,9 +17,6 @@ export class UserLoginComponent implements OnInit {
   datakey: string = 'UserData';
   userDetailArray = [];
 
-  //state variable
-  verifyUser: Boolean = false;
-
   constructor(private _fb: FormBuilder,
               private _router: Router) { }
 
@@ -42,9 +39,7 @@ export class UserLoginComponent implements OnInit {
           this.password.value == this.userDetailArray[i].password){
 
             sessionStorage.setItem('loggedinUser',this.userName.value);
-            this._router.navigateByUrl('/about').then(()=>
-              window.location.reload());
-            this.verifyUser = true;
+            this._router.navigateByUrl('/about');
       }
     }
 

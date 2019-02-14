@@ -1,5 +1,4 @@
 import { Component} from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +6,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  title = 'Routing-example';
-  // toggleVisibility: Boolean = false;
-
-  // constructor(private _router: Router) { }
-
-  // logOutCurrentSession = () => {
-  //   sessionStorage.removeItem('loggedinUser');
-  //   this.toggleVisibility = false;
-  //   this._router.navigateByUrl('/home');
-  // }
+  
 }

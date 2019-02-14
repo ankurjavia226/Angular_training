@@ -8,19 +8,23 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  toggleVisibility: Boolean = false;
+  title = 'Routing-example';
 
+  toggleRegandLoginbtn: Boolean = true;
+  toggleLogoutbtn: Boolean = false;  
   constructor(private _router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     if(sessionStorage.length){
-      this.toggleVisibility = true;
+      this.toggleLogoutbtn = true;
+      this.toggleRegandLoginbtn = false; 
     }
-  }
+  } 
 
   logOutCurrentSession = () => {
     sessionStorage.removeItem('loggedinUser');
-    this.toggleVisibility = false;
-    this._router.navigateByUrl('/home');
+    this.toggleLogoutbtn = false;
+    this.toggleRegandLoginbtn = true;
+    this._router.navigateByUrl('/dashboard');
   }
 }

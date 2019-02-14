@@ -64,7 +64,7 @@ export class UserRegistrationComponent implements OnInit {
     let userArrayString = JSON.stringify(this.userDetailArray);
     localStorage.setItem(this.datakey,userArrayString);
 
-    this._router.navigateByUrl('/home');
+    this._router.navigateByUrl('');
   }
 
   get firstName (){
