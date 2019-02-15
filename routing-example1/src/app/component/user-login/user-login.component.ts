@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { checkLocalStorage } from '../../shared-file/localStorageData';
+import { checkLocalStorage } from '../../shared/storage/localStorageData';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -18,7 +19,8 @@ export class UserLoginComponent implements OnInit {
   userDetailArray = [];
 
   constructor(private _fb: FormBuilder,
-              private _router: Router) { }
+              private _router: Router,
+              private _auth: AuthService) { }
 
   ngOnInit() {
     this.userLogin();
@@ -33,18 +35,19 @@ export class UserLoginComponent implements OnInit {
 
   onSubmit = () => {
     this.userDetailArray = checkLocalStorage();
-    
+
     for(let i=0; i<this.userDetailArray.length; i++){
       if(this.userName.value == this.userDetailArray[i].email && 
           this.password.value == this.userDetailArray[i].password){
 
             sessionStorage.setItem('loggedinUser',this.userName.value);
             this._router.navigateByUrl('/about-us');
+            this._auth.setLoggedIn(true);
       }
     }
 
-    if(!sessionStorage.length){
-      alert('Please enter correct cradential.!');
+    if(!sessionStorage.getItem('loggedinUser')){
+      alert('Please enter correct cradential.!'); 
     }
   }
 
