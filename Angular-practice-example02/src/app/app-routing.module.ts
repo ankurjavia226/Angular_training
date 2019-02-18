@@ -6,10 +6,12 @@ import { HomeComponent } from './components/header-components/home/home.componen
 import { AboutUsComponent } from './components/header-components/about-us/about-us.component';
 import { ContactUsComponent } from './components/header-components/contact-us/contact-us.component';
 
+
 const routes: Routes = [
+
   {
-    path: 'home', 
-    component: HomeComponent, 
+    path: 'home',
+    component: HomeComponent,
     canActivate: [AllowAccessGuard]
   }, 
   {
@@ -24,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: '**', 
-    redirectTo: '', 
+    redirectTo: '/home', 
     pathMatch: 'full'
   }
 ];

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserLoginComponent } from './auth module component/user-login/user-login.component';
 import { UserRegistrationComponent } from './auth module component/user-registration/user-registration.component';
 import { LoginActivateGuard } from './auth module guard/login-activate.guard';
-import { HeaderComponent } from '../components/header-components/header/header.component';
 
 const secondaryRoutes: Routes = [
   {
