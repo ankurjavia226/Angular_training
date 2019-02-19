@@ -8,11 +8,13 @@ import { AuthService } from '../services/auth.service';
 export class AllowAccessGuard implements CanActivate {
 
   sessionStorageKey: string =  'loggedinUser';
-  constructor(private _authService: AuthService, private _router: Router){}
+  constructor(private _authService: AuthService, 
+              private _router: Router){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      return !!this._authService.isLoggedIn;  
+
+    return !!this._authService.isLoggedIn;  
   }
 } 

@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
   providedIn: 'root'
 })
 export class LoginActivateGuard implements CanActivate {
+  sessionStorageKey: string =  'loggedinUser';
   constructor(private _auth:AuthService ,private _router: Router){}
 
   canActivate(
@@ -13,11 +14,10 @@ export class LoginActivateGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
     
     let activeRoute = true;
-    if(sessionStorage.getItem('loggedinUser')){
+    if(sessionStorage.getItem(this.sessionStorageKey)){
       activeRoute = false;
       this._router.navigate(['/about-us'])        
     }
-    //return !sessionStorage.getItem('loggedinUser');
     return activeRoute;
   }
 }

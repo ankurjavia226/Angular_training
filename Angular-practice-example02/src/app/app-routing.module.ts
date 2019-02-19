@@ -5,13 +5,13 @@ import { AuthRoutingModule } from './auth module/auth-routing.module';
 import { HomeComponent } from './components/header-components/home/home.component';
 import { AboutUsComponent } from './components/header-components/about-us/about-us.component';
 import { ContactUsComponent } from './components/header-components/contact-us/contact-us.component';
+import { HeaderComponent } from './shared module/shared module component/header/header.component';
 
 
 const routes: Routes = [
-
   {
     path: 'home',
-    component: HomeComponent,
+    component: HomeComponent, 
     canActivate: [AllowAccessGuard]
   }, 
   {

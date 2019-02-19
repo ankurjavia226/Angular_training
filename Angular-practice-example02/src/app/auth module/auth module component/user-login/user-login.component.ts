@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { checkLocalStorage } from '../../../shared module/storage/localStorageData';
+import { checkLocalStorage } from '../../../shared module/storage data info/localStorageData';
 import { AuthService } from '../../../auth module/auth module service/auth.service';
 
 @Component({

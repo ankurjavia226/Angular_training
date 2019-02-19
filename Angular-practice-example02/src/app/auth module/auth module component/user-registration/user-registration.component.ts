@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { passwordValidator } from '../../../shared module/validators/password.validator';
-import { checkLocalStorage } from '../../../shared module/storage/localStorageData';
+import { passwordValidator } from '../../../auth module/auth module validator/regisrationForm custom validators/password.validator';
+import { checkLocalStorage } from '../../../shared module/storage data info/localStorageData';
 
 @Component({
   selector: 'app-user-registration',

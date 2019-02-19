@@ -12,7 +12,8 @@ export class HeaderComponent implements OnInit {
   title = 'Routing-example';
   sessionStorageKey = "loggedinUser";
 
-  constructor(private _router: Router, private _authService: AuthService) { }
+  constructor(private _router: Router, 
+              private _authService: AuthService) { }
 
   ngOnInit() { 
 
@@ -25,6 +26,6 @@ export class HeaderComponent implements OnInit {
   logOutCurrentSession = () => {
     sessionStorage.removeItem(this.sessionStorageKey);
     this._authService.setLoggedIn(false);
-    this._router.navigate(['']); 
+    // this._router.navigate(['/user-login']);
   }
 }

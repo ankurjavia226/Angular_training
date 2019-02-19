@@ -13,9 +13,6 @@ export class AllowAccessGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    //console.log(!!sessionStorage.getItem(this.sessionStorageKey));
-    //console.log(!this._authService.isLoggedIn);
-    return !!sessionStorage.getItem(this.sessionStorageKey);
-    //return !this._authService.isLoggedIn; 
-  }
+      return !!sessionStorage.getItem(this.sessionStorageKey);
+    }
 }
