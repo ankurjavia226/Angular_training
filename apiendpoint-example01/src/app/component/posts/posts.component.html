@@ -1,0 +1,53 @@
+<div class="container-fluid">
+	<form [formGroup]="addPostForm" (ngSubmit)=onSubmit()>
+	  <div class="form-group">
+		<label>User ID :</label>
+		<input type="number" class="form-control" formControlName="userId"
+		  [class.is-invalid]="userId.invalid && userId.touched">
+		<small [class.d-none]="userId.valid || userId.untouched" 
+			class="text-danger">userId is Required</small>
+	  </div>
+  
+	  <div class="form-group">
+		<label>Title :</label>
+		<input type="text" class="form-control" formControlName="title"
+		  [class.is-invalid]="title.invalid && title.touched">
+		<small [class.d-none]="title.valid || title.untouched" 
+			class="text-danger">Title is Required</small>
+	  </div>
+
+	  <div class="form-group">
+		<label>Body :</label>
+		<input type="text" class="form-control" formControlName="body"	
+		  [class.is-invalid]="body.invalid && body.touched">
+		<small [class.d-none]="body.valid || body.untouched" 
+			class="text-danger">Body is Required</small>
+	  </div>
+  
+		<button type="submit" class="btn btn-primary" [disabled]="!addPostForm.valid"> 
+			{{ submitButtonText }} </button>
+	</form>
+</div>
+
+<hr>
+
+<div class="data" >
+	<table>	
+	  <tr>
+		<th> User Id</th>
+		<th> ID </th>
+		<th> Title </th>
+		<th> Body </th>
+		<th colspan="2"> Action </th>
+	  </tr>
+	  
+	  <tr class="dataForDisplay" *ngFor="let post of posts"> 
+		<td> {{ post.userId }} </td>
+		<td> {{ post.id }} </td>
+		<td> {{ post.title }} </td>
+		<td> {{ post.body }} </td>
+		<td><button (click)="updatePost(post)"> Update </button></td>
+		<td><button (click)="removePost(post.id)"> Remove </button></td>
+	  </tr>
+	</table>
+  </div>
