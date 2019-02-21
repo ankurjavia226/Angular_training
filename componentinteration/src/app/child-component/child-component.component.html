@@ -1,0 +1,13 @@
+<div style="text-align:center">
+  <h2>
+    Child-Component
+  </h2>
+  <div>
+    <label>Child Component </label>
+    <input type="text" (keyup)="onChange($event.target.value)" >
+  </div>
+  <div>
+    <label>Value of parent Component is: </label>
+    <label> {{ parentText }} </label>
+  </div>
+</div>

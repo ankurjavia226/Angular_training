@@ -1,0 +1,8 @@
+<app-video-url (urlForDisplayVideo)="getInputURL($event)" 
+    [receivedURL]="urlEnteredByUser">
+</app-video-url>
+<app-video-display *ngIf="urlEnteredByUser" [receivedURL]="urlEnteredByUser"
+    (clearDisplayVideoURL)="clearURL($event)">
+</app-video-display>
+
+<router-outlet></router-outlet>

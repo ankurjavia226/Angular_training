@@ -1,0 +1,11 @@
+<div *ngIf="receivedURL">
+    <iframe width="727" height="409" [src]='receivedURL' (load)="disableCancelBtn()"
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+<div *ngIf=errorOccured>
+    <button (click)="closeVideoScreen()">Cancel</button>
+</div>
+</div>
+
+<!-- https://www.youtube.com/embed/BGy8DdGw_WE -->  

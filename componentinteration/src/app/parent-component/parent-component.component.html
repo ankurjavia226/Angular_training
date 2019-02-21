@@ -1,0 +1,18 @@
+<div style="text-align:center">
+  <h2>
+    Parent-Component
+  </h2>
+  <div>
+    <label>Parent Component </label>
+    <input type="text" [(ngModel)] = "parentComponentText">
+  </div>
+  <div>
+    <label>Value of child Component is: </label>
+    <label> {{ displayChildComponentText }} </label>
+  </div>
+</div>
+
+<app-child-component 
+  [parentText]="parentComponentText"
+  (changeChildText)="getChildText($event)">
+</app-child-component>
