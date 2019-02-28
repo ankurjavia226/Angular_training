@@ -1,0 +1,17 @@
+<div >
+  <div style="display:inline-block">
+    <h1 style="float: left;">{{title}}</h1>
+    <button class="btn btn-secondary ml-2" routerLink="/registration" *ngIf="!toggleHeaderButtons"> 
+        Register</button>
+    <button class="btn btn-secondary ml-2" routerLink="/login" *ngIf="!toggleHeaderButtons">
+        Login </button>
+    <button class="btn btn-secondary ml-2" style="float:right" *ngIf="toggleHeaderButtons"
+        (click)=logOutCurrentSession()>Log Out!</button>
+  </div>
+  <div *ngIf="toggleHeaderButtons">
+    <nav class="ml-2">
+      <a routerLink="/home"> Home </a>
+      <a routerLink="/user-list"> User-List </a>
+    </nav>
+  </div>
+</div>

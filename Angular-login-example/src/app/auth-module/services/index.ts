@@ -1,0 +1,1 @@
+export * from '../../auth-module/services/userauthentication.service'
