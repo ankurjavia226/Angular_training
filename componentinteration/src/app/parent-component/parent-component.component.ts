@@ -15,7 +15,6 @@ export class ParentComponentComponent implements OnInit {
   }
 
   getChildText($event){
-    this.displayChildComponentText = $event;
-    
+    this.displayChildComponentText = $event;    
   }
 }
