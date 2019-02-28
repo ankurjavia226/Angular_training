@@ -62,7 +62,12 @@ export class PostsComponent implements OnInit {
 
   getData() {
     this._apiService.getPost()
-          .subscribe(res => this.posts = res);
+          .subscribe(res => {
+            
+            this.posts = res
+    console.log(this.posts);
+              
+          });
   }
 
   updatePost(post){
