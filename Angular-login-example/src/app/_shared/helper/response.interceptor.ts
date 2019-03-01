@@ -10,7 +10,7 @@ export class ResponseInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(tap(event => {
             if(event instanceof HttpResponse){
-                event.body.msg = 'Response changed sucessfully!';
+                event.body.msg = 'Response changed !';
             }
         }));
     }
