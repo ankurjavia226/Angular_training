@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit = () => {
-    this._userManagementService.setUser(this.email.value);
     this._userAuthenticateService.authenticateUser(this.userLoginForm.value)
           .subscribe(res => {
+            this._userManagementService.setUser(this.email.value);
             this._router.navigateByUrl('/home'); 
           });
      

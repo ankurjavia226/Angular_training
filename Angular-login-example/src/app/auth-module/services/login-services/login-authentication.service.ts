@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ApiEndpointURL } from 'src/app/_shared/constants';
+import { HttphelperService } from 'src/app/_shared/services/http-helper/httphelper.service';
+import { requestType } from 'src/app/_shared/enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginAuthenticationService {
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpHelper: HttphelperService) { }
 
   authenticateUser(cradentials) {
-    return this._httpClient.post(ApiEndpointURL.LOGIN_URL, cradentials);
+    //return this._httpClient.get(ApiEndpointURL.LOGIN_URL, cradentials);
+    return this._httpHelper.apiCallWithData(requestType.GET, ApiEndpointURL.LOGIN_URL, cradentials);
   }
 }
