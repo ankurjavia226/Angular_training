@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppStorage } from '../../constants';
-import { UsermanagementService } from 'src/app/feature-module/services';
+import { UsermanagementService } from 'src/app/feature-module/services/user-management-services';
 
 @Component({
   selector: 'app-header',

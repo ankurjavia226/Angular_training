@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent, RegisterComponent } from './components';
-import { LoginActivateGuard } from './guard';
+import { PublicGuard } from '../_guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    canActivate: [LoginActivateGuard]  
+    canActivate: [PublicGuard]  
   },
   {
     path: 'registration',
     component: RegisterComponent,
-    canActivate: [LoginActivateGuard]
+    canActivate: [PublicGuard]
   }
 ];
 

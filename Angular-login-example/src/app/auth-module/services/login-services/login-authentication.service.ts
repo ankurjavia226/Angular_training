@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiEndpointURL } from '../../shared/constants';
+import { ApiEndpointURL } from 'src/app/_shared/constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserauthenticationService {
+export class LoginAuthenticationService {
 
   constructor(private _httpClient: HttpClient) { }
 

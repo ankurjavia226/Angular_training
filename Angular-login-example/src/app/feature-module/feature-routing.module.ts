@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent, UserListComponent } from './components';
-import { AllowAccessGuard } from './guard';
+import { AuthGuard } from '../_guard';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AllowAccessGuard]  
+    canActivate: [AuthGuard]
   },
   {
     path: 'user-list',
     component: UserListComponent,
-    canActivate: [AllowAccessGuard]  
+    canActivate: [AuthGuard]  
   }
 ];
 

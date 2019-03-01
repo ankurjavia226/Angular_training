@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsermanagementService } from '../../services';
+import { UsermanagementService } from '../../services/user-management-services';
 
 @Component({
   selector: 'app-user-list',
