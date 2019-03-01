@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
   onSubmit = () => {
     this._userAuthenticateService.authenticateUser(this.userLoginForm.value)
           .subscribe(res => {
+            if(res['msg']){
+              alert('response changed sucessfully');
+            }
             this._userManagementService.setUser(this.email.value);
             this._router.navigateByUrl('/home'); 
           });
