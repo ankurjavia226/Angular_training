@@ -10,6 +10,6 @@ export class AboutUsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 }

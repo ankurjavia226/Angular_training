@@ -10,15 +10,15 @@ import { AuthService } from 'src/app/auth module/auth module service/auth.servic
 export class HeaderComponent implements OnInit {
 
   title = 'Routing-example';
-  sessionStorageKey = "loggedinUser";
+  sessionStorageKey = 'loggedinUser';
 
   constructor(private _router: Router, private _authService: AuthService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
 
   }
-  
-  get toggleHeaderButtons(){
+
+  get toggleHeaderButtons() {
     return sessionStorage.getItem(this.sessionStorageKey);
   }
 

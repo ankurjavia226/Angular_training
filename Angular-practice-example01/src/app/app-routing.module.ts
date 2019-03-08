@@ -8,23 +8,23 @@ import { ContactUsComponent } from './components/header-components/contact-us/co
 
 const routes: Routes = [
   {
-    path: 'home', 
-    component: HomeComponent, 
-    canActivate: [AllowAccessGuard]
-  }, 
-  {
-    path: 'about-us', 
-    component: AboutUsComponent, 
+    path: 'home',
+    component: HomeComponent,
     canActivate: [AllowAccessGuard]
   },
   {
-    path: 'contact-us', 
-    component: ContactUsComponent, 
+    path: 'about-us',
+    component: AboutUsComponent,
     canActivate: [AllowAccessGuard]
   },
   {
-    path: '**', 
-    redirectTo: '/home', 
+    path: 'contact-us',
+    component: ContactUsComponent,
+    canActivate: [AllowAccessGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
@@ -34,4 +34,4 @@ const routes: Routes = [
             AuthRoutingModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { } 
+export class AppRoutingModule { }

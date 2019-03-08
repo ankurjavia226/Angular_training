@@ -14,8 +14,8 @@ export class UserLoginComponent implements OnInit {
   // Form variable
   userLoginForm: FormGroup;
 
-  //data variables
-  sessionstorageDataKey: string = 'loggedinUser';
+  // data variables
+  sessionstorageDataKey = 'loggedinUser';
   userDetailArray = [];
 
   constructor(private _fb: FormBuilder,
@@ -28,27 +28,27 @@ export class UserLoginComponent implements OnInit {
 
   userLogin = () => {
     this.userLoginForm = this._fb.group({
-      userName: ['asda',Validators.required],
-      password: ['asdf',Validators.required]
+      userName: ['asda', Validators.required],
+      password: ['asdf', Validators.required]
     });
   }
 
   onSubmit = () => {
     this.userDetailArray = checkLocalStorage();
 
-    for(let i=0; i<this.userDetailArray.length; i++){
-      if(this.userName.value == this.userDetailArray[i].email && 
-          this.password.value == this.userDetailArray[i].password){
+    for (let i = 0; i < this.userDetailArray.length; i++) {
+      if (this.userName.value === this.userDetailArray[i].email &&
+          this.password.value === this.userDetailArray[i].password) {
 
-            sessionStorage.setItem(this.sessionstorageDataKey,this.userName.value);
+            sessionStorage.setItem(this.sessionstorageDataKey, this.userName.value);
             this._router.navigateByUrl('/about-us');
             this._auth.setLoggedIn(true);
             return;
       }
     }
 
-    if(!sessionStorage.getItem(this.sessionstorageDataKey)){
-      alert('Please enter correct cradential.!'); 
+    if (!sessionStorage.getItem(this.sessionstorageDataKey)) {
+      alert('Please enter correct cradential.!');
     }
   }
 
