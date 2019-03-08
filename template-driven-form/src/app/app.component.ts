@@ -13,7 +13,7 @@ export class AppComponent {
   submitted = false;
   errorMsg = '';
 
-  userModel = new User();
+  userModel = new User('Ankur', 'ankur@abc.com', 9408239141, '', 'morning', false);
 
   constructor(private _enrollmentService: EnrollmentService){}
 
