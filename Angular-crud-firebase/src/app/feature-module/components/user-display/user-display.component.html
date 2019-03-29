@@ -1,0 +1,19 @@
+<h2 class="display-4">User List</h2>
+  <table>	
+    <tr>
+      <th> Name </th>
+      <th> Email </th>
+      <th> PhoneNo </th>
+      <th> City </th>
+      <th colspan="2"> Action </th>
+    </tr>
+          
+    <tr class="dataForDisplay" *ngFor="let user of userList"> 
+      <td> {{ user.name }} </td>
+      <td> {{ user.email }} </td>
+      <td> {{ user.phoneNo }} </td>
+      <td> {{ user.city }} </td>
+      <td><button (click)="updateUser(user)"> Update </button></td>
+      <td><button (click)="removeUser(user.id)"> Remove </button></td>
+    </tr>
+  </table>

@@ -1,0 +1,12 @@
+<button (click)="generateQRCode()">Generate</button>
+<button (click)="downloadQRCode()">Download</button>
+
+<div id='qrcode'>
+<div *ngFor="let url of urlList" >  
+  <ngx-qrcode [qrc-element-type]="elementType" 
+    [qrc-value] = "url" >
+  </ngx-qrcode>
+</div>
+</div>
+
+<router-outlet></router-outlet>

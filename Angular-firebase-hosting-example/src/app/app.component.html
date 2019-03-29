@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-5">
+      <app-user 
+        [updateData]="dataForUpdate">
+      </app-user>
+  </div>
+  <div class="col-md-7">
+      <app-user-display
+        (loadUserData)="getData($event)">
+      </app-user-display>
+  </div>
+</div>
+<router-outlet></router-outlet>
