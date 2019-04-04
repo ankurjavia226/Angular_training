@@ -1,35 +1,55 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { UserComponent, UserDisplayComponent } from './feature-module/components';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
+import { UserService } from './_shared/services';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let dataForUpdate: String;
+
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
       declarations: [
-        AppComponent
+        AppComponent,
+        UserComponent,
+        UserDisplayComponent
       ],
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        AppRoutingModule,
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebse),
+        AngularFirestoreModule 
+      ],
+      providers: [AngularFirestore, 
+                  {provide: APP_BASE_HREF, useValue: '/'}, 
+                  UserService],
     }).compileComponents();
-  }));
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Angular-crud-firebase'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Angular-crud-firebase');
-  });
+  beforeEach(() => {
+    dataForUpdate = '';
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+  })
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Angular-crud-firebase!');
+  it('should create the appcomponent', () => {
+    expect(component).toBeTruthy();
   });
+  
+  it('getData function', () => {
+    expect(component.getData('$event')).toHaveBeenCalled;
+  })
 });

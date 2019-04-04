@@ -15,7 +15,7 @@ export class UserService {
   }
 
   createUser(userDetail: User){
-    return this._fireDatabase.collection(FirebaseDB.collection_name).add(userDetail);
+    this._fireDatabase.collection(FirebaseDB.collection_name).add(userDetail);
   }
 
   updateUser(id, userDetail: User){
@@ -24,6 +24,6 @@ export class UserService {
   }
 
   deleteUser(id){
-    return this._fireDatabase.doc(`${FirebaseDB.collection_name}/${id}`).delete();
+    this._fireDatabase.doc(`${FirebaseDB.collection_name}/${id}`).delete();
   }
 }

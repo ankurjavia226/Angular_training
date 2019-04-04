@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
-
   elementType :  'url' | 'canvas' | 'img' = 'canvas'; 
   value : string = 'http://app.msmwatercure.in/product-verify/GVilD4hohvLcfdIFhrq7THCrCiwwnyx9';
   response;
@@ -18,7 +17,6 @@ export class AppComponent {
 
   constructor(private _httpclient: HttpClient) { }
 
-   
   generateQRCode(){
     this._httpclient.post('http://app.msmwatercure.in:8080/product/item/filter', {
       "criteria": [
@@ -26,7 +24,7 @@ export class AppComponent {
           "column": "batchId",
           "operator": "=",
           "values": [
-            "hRL8P"
+            "bncaB"
           ]
         }
       ],
@@ -46,19 +44,15 @@ export class AppComponent {
   }
 
   downloadQRCode(){
-
-
     const divElem = document.getElementById('qrcode');
 
     var qrCodeCollection : HTMLCollection =  divElem.children;
-    var arr = Array.prototype.slice.call( qrCodeCollection )
+    var arr = Array.prototype.slice.call( qrCodeCollection );
     arr.forEach(element => {
       const canvas = element.querySelector("canvas") as HTMLCanvasElement;
       const imageData = canvas.toDataURL("image/jpeg").toString();
-    
       saveAs(imageData);  
     });
-
 
     // var blob = new Blob([imageData], { type: 'image/jpeg' });
     // var url = window.URL.createObjectURL(blob);

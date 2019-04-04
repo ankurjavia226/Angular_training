@@ -33,8 +33,6 @@ export class UserComponent implements OnInit {
       phoneNo: data.phoneNo,
       city: data.city
     });
-
-
   }
 
   createRegistrationForm() {
