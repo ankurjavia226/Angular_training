@@ -61,13 +61,11 @@ export class PostsComponent implements OnInit {
   }
 
   getData() {
-    this._apiService.getPost()
-          .subscribe(res => {
-            
-            this.posts = res
-    console.log(this.posts);
-              
-          });
+    this._apiService
+      .getPost()
+      .subscribe(res => {
+        this.posts = res              
+      });
   }
 
   updatePost(post){
@@ -88,7 +86,7 @@ export class PostsComponent implements OnInit {
           .subscribe(res => this.dataAfterRemoveOperation(id));
     }
   }
-  
+    
   dataAfterRemoveOperation(idForRemoveElement) {    
     this.posts = this.posts.filter(user => user.id != idForRemoveElement);
   }

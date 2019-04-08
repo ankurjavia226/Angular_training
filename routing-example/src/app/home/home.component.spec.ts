@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { NavigationMenuComponent } from '../navigation-menu/navigation-menu.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +11,14 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ 
+        HomeComponent,
+        NavigationMenuComponent,
+        DashboardComponent 
+      ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +29,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create home component', () => {
     expect(component).toBeTruthy();
   });
 });

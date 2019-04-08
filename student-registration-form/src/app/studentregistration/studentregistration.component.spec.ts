@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StudentregistrationComponent } from './studentregistration.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('StudentregistrationComponent', () => {
   let component: StudentregistrationComponent;
@@ -8,9 +10,14 @@ describe('StudentregistrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentregistrationComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,
+        ReactiveFormsModule
+      ],
+      declarations: [
+        StudentregistrationComponent
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +29,12 @@ describe('StudentregistrationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('removeAddress function should remove the selected address', () => {
+    expect(component.removeAddress(89045)).toHaveBeenCalled;
+  })
+
+  it('onSubmit function should have been called', () => {
+    expect(component.onSubmit()).toHaveBeenCalled;
+  })
 });

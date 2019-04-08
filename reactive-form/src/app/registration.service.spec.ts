@@ -1,12 +1,26 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 
 import { RegistrationService } from './registration.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RegistrationService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let service: RegistrationService;
+
+  beforeEach(async(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientModule
+    ],
+  })));
+
+  beforeEach(() => {
+    service = TestBed.get(RegistrationService);
+  })
 
   it('should be created', () => {
-    const service: RegistrationService = TestBed.get(RegistrationService);
     expect(service).toBeTruthy();
   });
+
+  it('register function should have been called', () => {
+    expect(service.register({})).toHaveBeenCalled;
+  })
 });

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserRegistrationComponent } from './user-registration.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('UserRegistrationComponent', () => {
   let component: UserRegistrationComponent;
@@ -8,7 +11,14 @@ describe('UserRegistrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserRegistrationComponent ]
+      declarations: [ 
+        UserRegistrationComponent,
+        DashboardComponent 
+      ],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +29,7 @@ describe('UserRegistrationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create user-registration component', () => {
     expect(component).toBeTruthy();
   });
 });

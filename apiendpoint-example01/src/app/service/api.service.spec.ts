@@ -1,12 +1,28 @@
-import { TestBed } from '@angular/core/testing';
+import { ApiService } from "./api.service";
+import { Spy, createSpyFromClass } from 'jasmine-auto-spies';
+import { Observable } from 'rxjs';
 
-import { ApiService } from './api.service';
+describe('ApiService ',() => {
+  let apiserviceSpy: Spy<ApiService>;
 
-describe('ApiService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => {
+    apiserviceSpy = createSpyFromClass(ApiService);
+  })
 
-  it('should be created', () => {
-    const service: ApiService = TestBed.get(ApiService);
-    expect(service).toBeTruthy();
-  });
-});
+  it('createPost should create post', () => {
+    apiserviceSpy.createPost.and.returnValue(Observable);
+  })
+
+  it('getPost should get list from server', () => {
+    apiserviceSpy.getPost.and.returnValue(Observable);
+  })
+
+  it('updatePost should update post', () => {
+    apiserviceSpy.updatePost.and.returnValue(Observable);
+  })
+
+  it('deletePost should remove post', () => {
+    apiserviceSpy.deletePost.and.returnValue(Observable);
+  })
+
+})
