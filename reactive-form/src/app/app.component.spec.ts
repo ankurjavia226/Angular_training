@@ -26,17 +26,25 @@ describe('AppComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.debugElement.componentInstance;
+    app.ngOnInit();
   })
 
   it('should create the app', () => {
     expect(app).toBeTruthy();
   });
 
-  xit('loadApiData function should have been called', () => {
-    expect(app.loadApiData()).toHaveBeenCalled;
+  
+  it('addAlternateEmail function should have been called', () => {
+    expect(app.addAlternateEmail()).toHaveBeenCalled;
+  });
+
+  it('loadApiData should have been called', () => {
+    let spy = spyOn(app, 'loadApiData').and.callFake;
+    expect(spy).toHaveBeenCalled;
+  });
+
+  it('onSubmit should have been called', () => {
+    expect(app.onSubmit()).toHaveBeenCalled;
   })
 
-  xit('onSubmit function should register when it called', () =>{
-    expect(app.onSubmit()).toHaveBeenCalled;
-  });
 });

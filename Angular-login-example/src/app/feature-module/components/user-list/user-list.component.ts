@@ -31,7 +31,7 @@ export class UserListComponent implements OnInit {
     let userData ;
     this._usermanagementService.getUserList()
           .subscribe(res => {
-            alert(res['msg']);            
+            //alert(res['msg']);            
             userData = res;
             this.users = userData.data;
           });

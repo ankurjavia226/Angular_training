@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserLoginComponent } from './user-login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UserLoginComponent', () => {
   let component: UserLoginComponent;
@@ -8,7 +10,13 @@ describe('UserLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserLoginComponent ]
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule
+      ],
+      declarations: [ 
+        UserLoginComponent 
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +27,11 @@ describe('UserLoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create user-login component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('onSubmit should have been called', () => {
+    expect(component.onSubmit()).toHaveBeenCalled;
+  })
 });

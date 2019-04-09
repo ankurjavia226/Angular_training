@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VideoUrlComponent } from './video-url.component';
+import { FormsModule } from '@angular/forms';
 
 describe('VideoUrlComponent', () => {
   let component: VideoUrlComponent;
@@ -8,7 +9,12 @@ describe('VideoUrlComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoUrlComponent ]
+      declarations: [ 
+        VideoUrlComponent 
+      ],
+      imports: [
+        FormsModule
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +25,12 @@ describe('VideoUrlComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create video-url component', () => {
     expect(component).toBeTruthy();
+    expect(component.ngOnChanges()).toHaveBeenCalled;
   });
+
+  it('playVideo function should have been called', () => {
+    expect(component.playVideo()).toHaveBeenCalled;
+  })
 });

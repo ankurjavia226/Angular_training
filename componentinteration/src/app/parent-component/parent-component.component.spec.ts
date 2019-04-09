@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ParentComponentComponent } from './parent-component.component';
+import { AppComponent } from '../app.component';
+import { ChildComponentComponent } from '../child-component/child-component.component';
+import { FormsModule } from '@angular/forms';
 
 describe('ParentComponentComponent', () => {
   let component: ParentComponentComponent;
@@ -8,7 +11,14 @@ describe('ParentComponentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParentComponentComponent ]
+      declarations: [ 
+        AppComponent,
+        ParentComponentComponent,
+        ChildComponentComponent 
+      ],
+      imports: [
+        FormsModule
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +29,12 @@ describe('ParentComponentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create parent component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('getChildText function should get the value from child component', () => {
+    let text = 'sdfds'
+    expect(component.getChildText(text)).toHaveBeenCalled;
+  })
 });

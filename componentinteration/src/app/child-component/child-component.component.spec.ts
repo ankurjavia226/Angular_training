@@ -19,7 +19,12 @@ describe('ChildComponentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create child component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('onChange function should have been called while enter the text', () => {
+    let text = "ankur";
+    expect(component.onChange(text)).toHaveBeenCalled;
+  })
 });

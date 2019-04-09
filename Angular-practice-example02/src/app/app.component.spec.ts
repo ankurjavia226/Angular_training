@@ -1,16 +1,26 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/header-components/home/home.component';
+import { ContactUsComponent } from './components/header-components/contact-us/contact-us.component';
+import { AboutUsComponent } from './components/header-components/about-us/about-us.component';
+import { SharedModule } from './shared module/shared.module';
+import { AuthModule } from './auth module/auth.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
       declarations: [
-        AppComponent
+        AppComponent,
+        HomeComponent,
+        AboutUsComponent,
+        ContactUsComponent
       ],
+      imports: [
+        RouterTestingModule,
+        AuthModule,
+        SharedModule
+      ]
     }).compileComponents();
   }));
 
@@ -18,18 +28,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'Angular-practice-example01'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Angular-practice-example01');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Angular-practice-example01!');
   });
 });

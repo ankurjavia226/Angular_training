@@ -19,7 +19,7 @@ describe('ContactUsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create contact-us component ', () => {
     expect(component).toBeTruthy();
   });
 });

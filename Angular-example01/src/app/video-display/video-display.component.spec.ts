@@ -18,7 +18,11 @@ describe('VideoDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create video-display component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('closeVideoScreen function should have been called', () => {
+    expect(component.closeVideoScreen()).toHaveBeenCalled;
+  })
 });
