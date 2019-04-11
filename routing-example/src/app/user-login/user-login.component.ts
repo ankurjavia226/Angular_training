@@ -18,7 +18,7 @@ export class UserLoginComponent implements OnInit {
   userDetailArray = [];
 
   constructor(private _fb: FormBuilder,
-              private _router: Router) { }
+              public _router: Router) { }
 
   ngOnInit() {
     this.userLogin();

@@ -2,20 +2,31 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Component } from '@angular/core';
+import { Location } from '@angular/common'
+import { By } from '@angular/platform-browser';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let toggleRegandLoginbtn: Boolean;
   let toggleLogoutbtn: Boolean;
+  let location: Location;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
-        DashboardComponent 
+        DashboardComponent,
+        dashboardDummyComponent,
+        userLoginDummyComponent,
+        userRegistrationDummyComponent 
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule.withRoutes([
+          {path: '', component: dashboardDummyComponent},
+          {path: 'user-login', component: userLoginDummyComponent},
+          {path: 'user-registration', component: userRegistrationDummyComponent},
+        ])
       ]
     })
     .compileComponents();
@@ -28,26 +39,57 @@ describe('DashboardComponent', () => {
 
     toggleRegandLoginbtn = true;
     toggleLogoutbtn = false;
-    sessionStorage.setItem('data', 'asdf');
+    sessionStorage.clear();
+    location = TestBed.get(Location);
   });
 
   it('should create dashboard component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle value of registratin, login and logout button when session storage has userlogin-data', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
+  it('should navigate to / when application start', () => {
+    expect(location.path()).toBe('');
+  });
 
-    expect(sessionStorage.length).toBeTruthy();
-  })
+  it('should navigate to /user-registration when registration button clicked', () => {
+    const button = fixture.debugElement.queryAll(By.css('button'));
+    const registrationBtn: HTMLButtonElement = button[0].nativeElement;
+    registrationBtn.click();
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(location.path()).toBe('/user-registration');
+    })
+  });
+
+  it('should navigate to /user-login when login button clicked', () => {
+    const button = fixture.debugElement.queryAll(By.css('button'));
+    const loginBtn: HTMLButtonElement = button[1].nativeElement;
+    loginBtn.click();
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(location.path()).toBe('/user-login');
+    })
+  });
 
   it('logOutCurrentSession function should have been called on logout button click', () => {
-    expect(component.logOutCurrentSession()).toHaveBeenCalled;
+    sessionStorage.setItem('Data', 'asd');
 
-    sessionStorage.clear();
+    const button = fixture.debugElement.queryAll(By.css('button'));
+    const logoutBtn: HTMLButtonElement = button[0].nativeElement;
+    logoutBtn.click();
     fixture.detectChanges();
-
-    expect(sessionStorage.length).toBeFalsy();
+    fixture.whenStable().then(() => {
+      expect(component.logOutCurrentSession()).toHaveBeenCalled;
+      //expect(location.path()).toBe('');
+    })
   })
 });
+
+@Component({template:''})
+class dashboardDummyComponent {}
+
+@Component({template:''})
+class userLoginDummyComponent {}
+
+@Component({template:''})
+class userRegistrationDummyComponent {}

@@ -33,6 +33,49 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
+  it('form invalid when empty', () => {
+    expect(app.registrationForm.valid).toBeFalsy();
+  });
+
+  it('userName field validity', () => {
+    let errors = {};
+    let userName = app.registrationForm.controls['userName'];
+    expect(userName.valid).toBeFalsy();
+
+    // firstName field is required
+    errors = userName.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
+
+  it('email field validity', () => {
+    let errors = {};
+    let email = app.registrationForm.controls['email'];
+    expect(email.valid).toBeTruthy();
+  });
+
+  it('subscribe field validity', () => {
+    let errors = {};
+    let subscribe = app.registrationForm.controls['subscribe'];
+    expect(subscribe.valid).toBeTruthy();
+  });
+
+  it('password field validity', () => {
+    let errors = {};
+    let password = app.registrationForm.controls['password'];
+    expect(password.valid).toBeTruthy();
+  });
+
+  it('email field validity', () => {
+    let errors = {};
+    let email = app.registrationForm.controls['email'];
+    expect(email.valid).toBeTruthy();
+  });
+
+  it('confirmPassword field validity', () => {
+    let errors = {};
+    let confirmPassword = app.registrationForm.controls['confirmPassword'];
+    expect(confirmPassword.valid).toBeTruthy();
+  });
   
   it('addAlternateEmail function should have been called', () => {
     expect(app.addAlternateEmail()).toHaveBeenCalled;

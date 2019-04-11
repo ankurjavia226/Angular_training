@@ -32,4 +32,12 @@ describe('HomeComponent', () => {
   it('should create home component', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should check for the session storage data', () => {
+  //   expect(sessionStorage.length).toBeFalsy();
+
+  //   sessionStorage.setItem('data', 'cradential');
+  //   fixture.detectChanges();
+  //   expect(sessionStorage.length).toBeTruthy();
+  // })
 });

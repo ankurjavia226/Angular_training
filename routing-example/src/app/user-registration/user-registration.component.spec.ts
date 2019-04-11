@@ -32,4 +32,13 @@ describe('UserRegistrationComponent', () => {
   it('should create user-registration component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('onSubmit function should have been called', () => {
+    expect(component.onSubmit()).toHaveBeenCalled;
+  })
+
+  it('removeAddress function should have been called', () => {
+    let index: number;
+    expect(component.removeAddress(index)).toHaveBeenCalled;
+  })
 });

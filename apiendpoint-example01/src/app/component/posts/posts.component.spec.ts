@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { PostsComponent } from './posts.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,12 +9,16 @@ import { HttpClientTestingModule  } from '@angular/common/http/testing';
 import { Spy, createSpyFromClass } from 'jasmine-auto-spies';
 import { ApiService } from 'src/app/service/api.service';
 import { IPosts } from 'src/app/model/posts';
+import { DebugElement } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 describe('PostsComponent', () => {
   let component: PostsComponent;
   let fixture: ComponentFixture<PostsComponent>;
   let componentSpy: Spy<PostsComponent>;
   let fakeData: IPosts;
+  let element: DebugElement;
+  let apiService: ApiService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,7 +45,9 @@ describe('PostsComponent', () => {
       id: 456789,
       title: 'adfdfdfaaaa',
       body: 'adfasdfasfadsfadfsaaaaaa'
-    }
+    };
+    element = fixture.debugElement;
+    apiService = element.injector.get(ApiService);
     fixture.detectChanges();
   });
 
@@ -57,12 +63,20 @@ describe('PostsComponent', () => {
     expect(component.addNewPostData()).toHaveBeenCalled;
   });
 
+  // it('fakeasync test', fakeAsync(() => {
+  //   spyOn(apiService, 'getPost').and.returnValues(Observable.of('Data'))
+  //   fixture.detectChanges();
+  //   tick();
+  //   fixture.detectChanges();
+  //   expect(component.getData).toBe('Data');  
+  // }));
+
   it('updatePostData function should have been called', () => {
     expect(component.updatePostData()).toHaveBeenCalled;
   });
  
   it('removePost function should have been called', () => {
-    expect(componentSpy.removePost(fakeData.id)).toBeTruthy;
+    expect(componentSpy.removePost(fakeData.id)).toHaveBeenCalled;
   })
 
   it('updatePost function should have been called', () => {
@@ -71,5 +85,16 @@ describe('PostsComponent', () => {
 
   it('dataAfterRemoveOperation function should have been called', () => {
     expect(componentSpy.dataAfterRemoveOperation()).toHaveBeenCalled;
+  })
+
+  it('get data', () => {
+    let response;
+    spyOn(apiService, 'getPost').and.returnValue(of(fakeData));
+
+    apiService.getPost().subscribe(res => {
+      response = res;
+    });
+
+    expect(response).toEqual(fakeData);
   })
 });
