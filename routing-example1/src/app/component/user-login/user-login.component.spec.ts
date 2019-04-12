@@ -4,6 +4,8 @@ import { UserLoginComponent } from './user-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('UserLoginComponent', () => {
   let component: UserLoginComponent;
@@ -13,11 +15,7 @@ describe('UserLoginComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
-        RouterTestingModule.withRoutes([
-          {path: 'user-login', component: userLoginDummyComponent},
-          {path: 'user-registration', component: userRegistrationDummyComponent},
-          {path: 'about-us', component: AbouUsDummyComponent},
-        ])
+        RouterTestingModule
       ],
       declarations: [ 
         UserLoginComponent 
@@ -36,17 +34,20 @@ describe('UserLoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  xit('should navigate to about component if login sucess onSubmit ', () => {
+    component.userLoginForm.setValue({userName: 'asda', password: 'asdf'});
+    const router = TestBed.get(Router);
+    spyOn(router, 'navigateByUrl');
+    const button = fixture.debugElement.query(By.css('button'));
+    const loginBtn: HTMLButtonElement = button.nativeElement;
+    loginBtn.click();
+    expect(router.navigateByUrl).
+      toHaveBeenCalledWith(router.createUrlTree(['/user-login']),
+      {skipLocationChange: false, replaceUrl: false});
+  });
+
   it('onSubmit should have been called', () => {
     expect(component.onSubmit()).toHaveBeenCalled;
   });
+
 });
-
-@Component({template:''})
-class AbouUsDummyComponent {}
-
-@Component({template:''})
-class userLoginDummyComponent {}
-
-@Component({template:''})
-class userRegistrationDummyComponent {}
-

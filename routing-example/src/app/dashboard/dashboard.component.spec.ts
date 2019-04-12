@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common'
 import { By } from '@angular/platform-browser';
+import { text } from '@angular/core/src/render3';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -12,6 +13,7 @@ describe('DashboardComponent', () => {
   let toggleRegandLoginbtn: Boolean;
   let toggleLogoutbtn: Boolean;
   let location: Location;
+  //let dh: DOMHelper;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,6 +43,7 @@ describe('DashboardComponent', () => {
     toggleLogoutbtn = false;
     sessionStorage.clear();
     location = TestBed.get(Location);
+    //dh = new DOMHelper(fixture);
   });
 
   it('should create dashboard component', () => {
@@ -64,6 +67,7 @@ describe('DashboardComponent', () => {
   it('should navigate to /user-login when login button clicked', () => {
     const button = fixture.debugElement.queryAll(By.css('button'));
     const loginBtn: HTMLButtonElement = button[1].nativeElement;
+    //dh.text('button'));
     loginBtn.click();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
@@ -93,3 +97,17 @@ class userLoginDummyComponent {}
 
 @Component({template:''})
 class userRegistrationDummyComponent {}
+
+// class DOMHelper {
+//   private fixture: ComponentFixture<DashboardComponent>
+//   constructor(fixtur: ComponentFixture<DashboardComponent>){
+//     this.fixture = fixtur;
+//   }
+
+//   text(tagName: string): string{
+//     const element = this.fixture.debugElement.query(By.css(tagName));
+//     if(element){
+//       return element.nativeElement.textContent;
+//     }
+//   }
+// }

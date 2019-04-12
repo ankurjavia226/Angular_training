@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -38,4 +40,15 @@ describe('HeaderComponent', () => {
 
     expect(sessionStorage.length).not.toBeTruthy;
   })
+
+  xit('should navigate to about component', () => {
+    const router = TestBed.get(Router);
+    spyOn(router, 'navigateByUrl');
+    const button = fixture.debugElement.query(By.css('a'));
+    const about: HTMLAnchorElement = button[0].nativeElement;
+    about.click();
+    expect(router.navigateByUrl).
+      toHaveBeenCalledWith(router.createUrlTree(['/about']),
+      {skipLocationChange: false, replaceUrl: false});
+  });
 });
